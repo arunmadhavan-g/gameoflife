@@ -86,7 +86,7 @@ Output D
 	<br/>
 	X - - X
 	<br/>
-	- - - X
+	X - - X
 	<br/>
 	- X - -
 	<br/>
