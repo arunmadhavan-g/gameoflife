@@ -21,46 +21,46 @@ The inputs below represent the cells in the universe as X or - . X is a alive ce
 -------------------------------------------------------------------------------------------
 Input A:
 (Block pattern)
-     X X
-     X X
-                                          
+	X X
+	X X
+
 Output A:
-     X X
-     X X
+	X X
+	X X
  
 -------------------------------------------------------------------------------------------
 Input B
 (Boat pattern)
-X X -
-X - X
-- X -
- 
+	X X -
+	X - X
+	- X -
+
 Output B
-X X -
-X - X
-- X -
+	X X -
+	X - X
+	- X -
  
 -------------------------------------------------------------------------------------------
 Input C
 (Blinker pattern)
-     - X -
-     - X -
-     - X -
-	 
+	- X -
+	- X -
+	- X -
+
 Output C
-     - - -
-     X X X
-     - - -
- 
+	- - -
+	X X X
+	- - -
+	
 -------------------------------------------------------------------------------------------
 Input D
 (Toad pattern)
-        - X X X
-        X X X -
- 
+	- X X X
+	- X X X -
+
 Output D
-        - - X -
-        X - - X
-        X - - X
-        - X - -
+	- - X -
+	X - - X
+	- - - X
+	- X - -
 
