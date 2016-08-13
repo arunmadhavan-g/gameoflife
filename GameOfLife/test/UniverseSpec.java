@@ -1,4 +1,4 @@
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
@@ -99,16 +99,33 @@ public class UniverseSpec {
 	@Test
 	public void blinkerPattern() throws Exception {
 		Universe universe = new Universe(3,3)
-								.seed(0, "-", "X", "-")
 								.seed(1, "-", "X", "-")
-								.seed(2, "-", "X", "-");
+								.seed(2, "-", "X", "-")
+								.seed(3, "-", "X", "-");
 		
 		Universe newUniverse = universe.applyRules(rulesList);
 		
 		assertThat(newUniverse.toString()).isEqualTo(new Universe(3, 3)
-														.seed(0, false, false, false)
-														.seed(1, true, true, true)
-														.seed(2,  false, false, false).toString());
+														.seed(1, false, false, false)
+														.seed(2, true, true, true)
+														.seed(3,  false, false, false).toString());
+	}
+	
+	@Test
+	public void toadPattern() throws Exception {
+		
+		//Given
+		Universe universe = new Universe(2, 4)
+								.seed(1, "-","X","X","X")
+								.seed(2, "X","X","X","-");
+		//When
+		Universe newUniverse = universe.applyRules(rulesList);
+		//Then
+		assertThat(newUniverse.toString()).isEqualTo(new Universe(4,4)
+															.seed(1,false, false, true, false)
+															.seed(2, true, false, false, true)
+															.seed(3, true, false, false, true)
+															.seed(4, false, true, false, false).toString());
 	}
 	
 	

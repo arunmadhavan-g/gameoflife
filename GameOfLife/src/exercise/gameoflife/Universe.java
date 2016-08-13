@@ -11,26 +11,26 @@ public class Universe {
 	private final int maxColumns;
 	
 	public Universe(int rows, int columns) {
-		this.maxRows = rows;
-		this.maxColumns = columns;
-		cells = new Cell[rows][columns];
+		this.maxRows = rows+2;
+		this.maxColumns = columns+2;
+		cells = new Cell[maxRows][maxColumns];
 		
-		for(int i=0;i<rows;i++){
+		for(int i=0;i<maxRows;i++){
 			Arrays.fill(cells[i], new Cell(false));
 		}
 	}
 
 	public Universe(int rows, int columns, Cell[][] cells) {
-		this.maxRows = rows;
-		this.maxColumns = columns;
+		this.maxRows = rows+2;
+		this.maxColumns = columns+2;
 		this.cells = cells;
 	}
 
 	public Universe seed(int row, boolean ...isAlive) {
-		for(int i=0;i<this.maxColumns; i++){
-			cells[row][i] = new Cell(isAlive[i]); 
+		for(int i=1,j=0;i<this.maxColumns-1; i++, j++){
+			cells[row][i] = new Cell(isAlive[j]); 
 		}
-		return new Universe(this.maxRows, this.maxColumns, cells);
+		return new Universe(this.maxRows-2, this.maxColumns-2, cells);
 	}
 	
 	public Universe seed(int row, String ...xOrDash){
@@ -45,18 +45,6 @@ public class Universe {
 			position++;
 		}
 		return isAliveList;
-	}
-
-	@Override
-	public String toString() {
-		StringBuffer buff =  new StringBuffer();
-		for(int i=0;i<maxRows; i++){
-			for(int j=0;j<maxColumns; j++){
-				buff.append(cells[i][j]).append(" ");
-			}
-			buff.append("\n");
-		}
-		return buff.toString();
 	}
 
 	public int countAdjacentAliveCells(int row, int column) {
@@ -83,7 +71,20 @@ public class Universe {
 				newCells[i][j] = cells[i][j].applyRules(rules, countAdjacentAliveCells(i, j));
 			}
 		}
-		return new Universe(maxRows, maxColumns, newCells);
+		return new Universe(maxRows-2, maxColumns-2, newCells);
 	}
+	
+	@Override
+	public String toString() {
+		StringBuffer buff =  new StringBuffer();
+		for(int i=0;i<maxRows; i++){
+			for(int j=0;j<maxColumns; j++){
+				buff.append(cells[i][j]).append(" ");
+			}
+			buff.append("\n");
+		}
+		return buff.toString();
+	}
+	
 }
  
