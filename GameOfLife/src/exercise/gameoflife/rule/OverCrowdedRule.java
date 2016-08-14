@@ -1,7 +1,7 @@
 package exercise.gameoflife.rule;
 import exercise.gameoflife.Cell;
 
-public class OverCrowdRule implements Rule {
+public class OverCrowdedRule implements Rule {
 
 	@Override
 	public Cell apply(Cell cell, int adjacentLiveCellCount) {

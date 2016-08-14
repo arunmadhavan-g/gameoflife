@@ -1,3 +1,4 @@
+package exercise.gameoflife;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
@@ -7,7 +8,7 @@ import com.google.common.collect.Lists;
 import exercise.gameoflife.Cell;
 import exercise.gameoflife.rule.BringAliveWhen3Rule;
 import exercise.gameoflife.rule.LonelyRule;
-import exercise.gameoflife.rule.OverCrowdRule;
+import exercise.gameoflife.rule.OverCrowdedRule;
 
 public class CellSpec {
 
@@ -48,7 +49,7 @@ public class CellSpec {
 		//Given
 		Cell cell = new Cell(true);
 		//When
-		Cell modifiedCell = cell.applyRules(Lists.newArrayList(new LonelyRule(), new OverCrowdRule(), new BringAliveWhen3Rule()), 4);
+		Cell modifiedCell = cell.applyRules(Lists.newArrayList(new LonelyRule(), new OverCrowdedRule(), new BringAliveWhen3Rule()), 4);
 		//Then
 		assertThat(modifiedCell).isEqualTo(new Cell(false));
 	}

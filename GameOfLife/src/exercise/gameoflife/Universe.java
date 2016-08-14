@@ -3,6 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import exercise.gameoflife.rule.Rule;
+import exercise.gameoflife.util.DoubleDimentionalArrayUtil;
 
 public class Universe {
 	
@@ -26,28 +27,38 @@ public class Universe {
 		this.cells = cells;
 	}
 
+	public Universe seed(int row, Cell ...rowCells){
+		DoubleDimentionalArrayUtil.alterRow(this.cells, row, 1,  rowCells);
+		return new Universe(this.maxRows-2, this.maxColumns-2, this.cells);
+	}
 	public Universe seed(int row, boolean ...isAlive) {
-		for(int i=1,j=0;i<this.maxColumns-1; i++, j++){
-			cells[row][i] = new Cell(isAlive[j]); 
-		}
-		return new Universe(this.maxRows-2, this.maxColumns-2, cells);
+		return seed(row, booleanToCells(isAlive));
 	}
 	
 	public Universe seed(int row, String ...xOrDash){
-		return seed(row, liveListFromString(xOrDash));
+		return seed(row, stringToCells(xOrDash));
 	}
 	
-	private boolean[] liveListFromString(String[] xOrDash) {
-		boolean[] isAliveList = new boolean[xOrDash.length];
+	private Cell[] booleanToCells(boolean[] isAliveList){
+		Cell[] cells = new Cell[isAliveList.length];
 		int position = 0;
-		for(String str: xOrDash){
-			isAliveList[position] = ("X").equalsIgnoreCase(str);
+		for(boolean isAlive: isAliveList){
+			cells[position] = new Cell(isAlive);
 			position++;
 		}
-		return isAliveList;
+		return cells;
+	}
+	private Cell[] stringToCells(String[] xOrDash) {
+		Cell[] cells = new Cell[xOrDash.length];
+		int position = 0;
+		for(String str: xOrDash){
+			cells[position] = new Cell(("X").equalsIgnoreCase(str));
+			position++;
+		}
+		return cells;
 	}
 
-	public int countAdjacentAliveCells(int row, int column) {
+	int countAdjacentAliveCells(int row, int column) {
 		int count = 0;
 		for(int i=row-1; i<= row+1; i++){
 			if(i>=0 && i<this.maxRows){

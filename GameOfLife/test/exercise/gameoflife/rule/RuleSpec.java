@@ -1,3 +1,4 @@
+package exercise.gameoflife.rule;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
@@ -6,7 +7,7 @@ import exercise.gameoflife.Cell;
 import exercise.gameoflife.rule.BringAliveWhen3Rule;
 import exercise.gameoflife.rule.Rule;
 import exercise.gameoflife.rule.LonelyRule;
-import exercise.gameoflife.rule.OverCrowdRule;
+import exercise.gameoflife.rule.OverCrowdedRule;
 
 public class RuleSpec {
 
@@ -29,7 +30,7 @@ public class RuleSpec {
 	public void killSpecificCellIfOverCrowded() throws Exception {
 		//Given
 		int adjacentLiveCellCount = 4;
-		Rule overCrowdRule = new OverCrowdRule();
+		Rule overCrowdRule = new OverCrowdedRule();
 		//When
 		Cell modifiedCell = overCrowdRule.apply(liveCell, adjacentLiveCellCount);
 		//Then
