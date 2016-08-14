@@ -1,9 +1,9 @@
 package exercise.gameoflife;
-import java.util.Arrays;
 import java.util.List;
 
 import exercise.gameoflife.rule.Rule;
 import exercise.gameoflife.util.DoubleDimentionalArrayUtil;
+import exercise.gameoflife.util.UniverseHelper;
 
 public class Universe {
 	
@@ -15,10 +15,7 @@ public class Universe {
 		this.maxRows = rows+2;
 		this.maxColumns = columns+2;
 		cells = new Cell[maxRows][maxColumns];
-		
-		for(int i=0;i<maxRows;i++){
-			Arrays.fill(cells[i], new Cell(false));
-		}
+		DoubleDimentionalArrayUtil.initialize(cells, new Cell(false));
 	}
 
 	public Universe(int rows, int columns, Cell[][] cells) {
@@ -32,31 +29,13 @@ public class Universe {
 		return new Universe(this.maxRows-2, this.maxColumns-2, this.cells);
 	}
 	public Universe seed(int row, boolean ...isAlive) {
-		return seed(row, booleanToCells(isAlive));
+		return seed(row, UniverseHelper.booleanToCells(isAlive));
 	}
 	
 	public Universe seed(int row, String ...xOrDash){
-		return seed(row, stringToCells(xOrDash));
+		return seed(row, UniverseHelper.stringToCells(xOrDash));
 	}
 	
-	private Cell[] booleanToCells(boolean[] isAliveList){
-		Cell[] cells = new Cell[isAliveList.length];
-		int position = 0;
-		for(boolean isAlive: isAliveList){
-			cells[position] = new Cell(isAlive);
-			position++;
-		}
-		return cells;
-	}
-	private Cell[] stringToCells(String[] xOrDash) {
-		Cell[] cells = new Cell[xOrDash.length];
-		int position = 0;
-		for(String str: xOrDash){
-			cells[position] = new Cell(("X").equalsIgnoreCase(str));
-			position++;
-		}
-		return cells;
-	}
 
 	int countAdjacentAliveCells(int row, int column) {
 		int count = 0;
@@ -88,8 +67,10 @@ public class Universe {
 	@Override
 	public String toString() {
 		StringBuffer buff =  new StringBuffer();
-		for(int i=0;i<maxRows; i++){
-			for(int j=0;j<maxColumns; j++){
+		Cell[][] cells = DoubleDimentionalArrayUtil.trim(this.cells, Cell.class, new Cell(false));
+		
+		for(int i=0;i<cells.length; i++){
+			for(int j=0;j<cells[0].length; j++){
 				buff.append(cells[i][j]).append(" ");
 			}
 			buff.append("\n");

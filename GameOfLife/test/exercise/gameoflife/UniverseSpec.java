@@ -25,7 +25,7 @@ public class UniverseSpec {
 		Universe newUniverse = universe.seed(1, true, true)
 										.seed(2, true, true);
 		// Then
-		assertThat(newUniverse.toString()).isEqualTo("- - - - \n- X X - \n- X X - \n- - - - \n");
+		assertThat(newUniverse.toString()).isEqualTo("X X \nX X \n");
 	}
 	
 	@Test
@@ -34,7 +34,7 @@ public class UniverseSpec {
 		Universe universe = new Universe(2, 2);
 		//When
 		//Then
-		assertThat(universe.toString()).isEqualTo("- - - - \n- - - - \n- - - - \n- - - - \n");
+		assertThat(universe.toString()).isEqualTo("- - \n- - \n");
 	}
 	
 	@Test
